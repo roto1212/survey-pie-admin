@@ -23,7 +23,8 @@ function MainLayout({ children, selectedKey }) {
   const [selectedKeys, setSelectedKeys] = useState([selectedKey]);
 
   useEffect(() => {
-    setSelectedKeys([location.pathname.split('/')[1]]);
+    const path = location.pathname.split('/')[1];
+    setSelectedKeys([path || 'list']);
   }, [location]);
 
   return (
@@ -39,6 +40,7 @@ function MainLayout({ children, selectedKey }) {
         />
         <Menu
           theme="dark"
+          defaultSelectedKeys={['list']}
           selectedKeys={selectedKeys}
           mode="inline"
           items={items}
