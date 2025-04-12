@@ -48,7 +48,7 @@ function MainLayout({ children, selectedKey }) {
 			</Sider>
 			<Layout>
 				<Header />
-				<Content>{children}</Content>
+				<Content style={{margin: "10px"}}>{children}</Content>
 			</Layout>
 		</Layout>
 	);

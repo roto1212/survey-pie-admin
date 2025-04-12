@@ -1,18 +1,22 @@
-import {Col, Row} from "antd";
+import {Col, Input, Row} from "antd";
 
+import OptionSection from "../components/OptionSection";
+import PreviewSection from "../components/PreviewSection";
 import MainLayout from "../layouts/MainLayout";
 function BuilderPage() {
-	return (
-		<div>
-			<MainLayout selectedKey="builder">
-				<h1>BuilderPage</h1>
-        <Row>
-          <Col flex="auto">Preview</Col>
-          <Col flex="300px">Option</Col>
-        </Row>
-			</MainLayout>
-		</div>
-	);
+  return (
+    <MainLayout selectedKey="builder">
+      <Row>
+        <Col flex="auto">
+          <Input style={{}} placeholder="설문제목을 입력해주세요." />
+          <PreviewSection />
+        </Col>
+        <Col flex="300px">
+          <OptionSection />
+        </Col>
+      </Row>
+    </MainLayout>
+  );
 }
 
 export default BuilderPage;
