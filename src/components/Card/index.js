@@ -31,7 +31,7 @@ const ButtonGroupWrapper = styled.div`
 `;
 const ButtonGroup = styled.div`
   background: #fff;
-  margin-left: 30px;
+  margin-left: 10px;
   border: 1px solid #dddddd;
   border-radius: 5px;
 `;
