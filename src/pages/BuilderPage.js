@@ -5,6 +5,9 @@ import OptionSection from '../components/OptionSection';
 import PreviewSection from '../components/PreviewSection';
 import MainLayout from '../layouts/MainLayout';
 
+import OptionSection from "../components/OptionSection";
+import PreviewSection from "../components/PreviewSection";
+import MainLayout from "../layouts/MainLayout";
 function BuilderPage() {
   const [data, setData] = useState({
     "id": 3,

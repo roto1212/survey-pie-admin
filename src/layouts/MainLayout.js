@@ -6,16 +6,16 @@ import { Link, useLocation } from 'react-router-dom';
 const { Header, Content, Sider } = Layout;
 
 const items = [
-  {
-    key: 'list',
-    icon: <HomeOutlined />,
-    label: <Link to="/list">List</Link>,
-  },
-  {
-    key: 'builder',
-    icon: <BuildOutlined />,
-    label: <Link to="/builder">Builder</Link>,
-  },
+	{
+		key: "list",
+		icon: <HomeOutlined />,
+		label: <Link to="/list">List</Link>,
+	},
+	{
+		key: "builder",
+		icon: <BuildOutlined />,
+		label: <Link to="/builder">Builder</Link>,
+	},
 ];
 
 
@@ -29,10 +29,10 @@ function MainLayout({ children, selectedKey }) {
   const [selectedKeys, setSelectedKeys] = useState([selectedKey]);
 
 
-  useEffect(() => {
-    const path = location.pathname.split('/')[1];
-    setSelectedKeys([path || 'list']);
-  }, [location]);
+	useEffect(() => {
+		const path = location.pathname.split("/")[1];
+		setSelectedKeys([path || "list"]);
+	}, [location]);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>

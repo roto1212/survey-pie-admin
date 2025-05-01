@@ -1,7 +1,7 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
-import BuilderPage from './pages/BuilderPage';
-import ListPage from './pages/ListPage';
+import BuilderPage from "./pages/BuilderPage";
+import ListPage from "./pages/ListPage";
 
 function App() {
   return (
