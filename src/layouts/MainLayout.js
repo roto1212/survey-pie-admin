@@ -1,6 +1,6 @@
 import { BuildOutlined, HomeOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const { Header, Content, Sider } = Layout;
@@ -18,9 +18,16 @@ const items = [
   },
 ];
 
+
 function MainLayout({ children, selectedKey }) {
+  const contentStyle = useMemo(() => {
+    return {
+      padding: 45,
+    };
+  }, []);
   const location = useLocation();
   const [selectedKeys, setSelectedKeys] = useState([selectedKey]);
+
 
   useEffect(() => {
     const path = location.pathname.split('/')[1];
@@ -48,7 +55,7 @@ function MainLayout({ children, selectedKey }) {
       </Sider>
       <Layout>
         <Header />
-        <Content>{children}</Content>
+        <Content  style={contentStyle} >{children}</Content>
       </Layout>
     </Layout>
   );
