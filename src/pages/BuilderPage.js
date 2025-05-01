@@ -4,6 +4,7 @@ import { useState } from 'react';
 import OptionSection from '../components/OptionSection';
 import PreviewSection from '../components/PreviewSection';
 import MainLayout from '../layouts/MainLayout';
+import {produce} from "immer";
 
 function BuilderPage() {
   const [data, setData] = useState({
@@ -48,8 +49,47 @@ function BuilderPage() {
       <MainLayout selectedKey="builder">
         <Row>
           <Col flex="auto">
-            <Input placeholder="설문 제목을 입력해주세요." value={data.title} onChange={(e) => setData({ ...data, title: e.target.value })} />
-            <PreviewSection questions={data.questions} />
+            <Input placeholder="설문 제목을 입력해주세요." value={data.title}
+              onChange={(e) => setData(produce(data, draft => {
+                draft.title = e.target.value
+              }))}
+            />
+            <PreviewSection questions={data.questions}
+              addQuestion={() => {
+                setData(produce(data, draft => {
+                  draft.questions.push({
+                    title: "Untitled",
+                    desc: "",
+                    type: "text",
+                    required: false,
+                    options: {
+                      max: 20,
+                      placeholder: ""
+                    }
+                  })
+                }))
+              }}
+              moveUpQuestion={(index) => {
+                if (index === 0) return;
+                setData(produce(data, draft => {
+                  const question = draft.questions[index];
+                  draft.questions[index] = draft.questions[index - 1];
+                  draft.questions[index - 1] = question;
+                }))
+              }}
+              moveDownQuestion={(index) => {
+                if (index === data.questions.length - 1) return;
+                setData(produce(data, draft => {
+                  const question = draft.questions[index];
+                  draft.questions[index] = draft.questions[index + 1];
+                  draft.questions[index + 1] = question;
+                }))
+              }}
+              deleteQuestion={(index) => {
+                setData(produce(data, draft => {
+                  draft.questions.splice(index, 1);
+                }))
+              }} />
           </Col>
           <Col flex="350px">
             <OptionSection />

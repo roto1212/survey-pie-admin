@@ -1,4 +1,4 @@
-import { Button, Space, Table, Tag } from 'antd';
+import { Button, Table } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
@@ -42,22 +42,22 @@ function ListPage() {
   const { data, error } = useSWR('/surveys', fetcher);
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return <div>Loading...</div>;
   return (
     <div>
       <MainLayout selectedKey="list">
-        <Table 
+        <Table
           onRow={(record, rowIndex) => {
             return {
               onClick: (event) => {
                 navigate(`/builder/${record.id}`);
               }, // click row
             };
-          }} 
-          columns={columns} 
-          dataSource={data.map((item) => ({...item, key: item.id}))} 
+          }}
+          columns={columns}
+          dataSource={data.map((item) => ({...item, key: item.id}))}
           pagination={
             {
               total: data.length,
