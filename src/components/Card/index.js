@@ -1,26 +1,32 @@
-import { Button } from 'antd';
-import { ArrowDownOutlined, ArrowUpOutlined, DeleteOutlined } from '@ant-design/icons';
-import styled from 'styled-components';
+import { Button } from "antd";
+import {
+	ArrowDownOutlined,
+	ArrowUpOutlined,
+	DeleteOutlined,
+} from "@ant-design/icons";
+import styled from "styled-components";
 
-function Card({title, desc, children, onMoveUp, onMoveDown, onDelete}) {
-  return (
-    <CardWrapper>
-      <Head>
-        <Title>{title}</Title>
-        <Desc>{desc}</Desc>
-      </Head>
-      <Body>
-        {children}
-      </Body>
-      <ButtonGroupWrapper>
-        <ButtonGroup>
-          <Button type="text" icon={<ArrowUpOutlined />} onClick={onMoveUp}/>
-          <Button type="text" icon={<DeleteOutlined />} onClick={onDelete}/>
-          <Button type="text" icon={<ArrowDownOutlined />} onClick={onMoveDown}/>
-        </ButtonGroup>
-      </ButtonGroupWrapper>
-    </CardWrapper>
-  );
+function Card({ title, desc, children, onMoveUp, onMoveDown, onDelete }) {
+	return (
+		<CardWrapper>
+			<Head>
+				<Title>{title}</Title>
+				<Desc>{desc}</Desc>
+			</Head>
+			<Body>{children}</Body>
+			<ButtonGroupWrapper>
+				<ButtonGroup>
+					<Button type="text" icon={<ArrowUpOutlined />} onClick={onMoveUp} />
+					<Button type="text" icon={<DeleteOutlined />} onClick={onDelete} />
+					<Button
+						type="text"
+						icon={<ArrowDownOutlined />}
+						onClick={onMoveDown}
+					/>
+				</ButtonGroup>
+			</ButtonGroupWrapper>
+		</CardWrapper>
+	);
 }
 const ButtonGroupWrapper = styled.div`
   position: absolute;
@@ -62,5 +68,3 @@ const Body = styled.div`
 `;
 
 export default Card;
-
-
