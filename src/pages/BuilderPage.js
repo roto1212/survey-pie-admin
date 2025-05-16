@@ -29,9 +29,9 @@ function BuilderPage() {
 	}
 	return (
 		<div>
-			<MainLayout selectedKey="builder">
-				<Row>
-					<Col flex="auto">
+			<MainLayout selectedKey="builder" padding={0}>
+				<Row style={{ height: "100%" }}>
+					<Col flex="auto" style={{ padding: 30 }}>
 						<BuilderTitleInput />
 						<PreviewSection />
 					</Col>

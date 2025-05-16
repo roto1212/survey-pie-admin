@@ -6,10 +6,10 @@ import {
 } from "@ant-design/icons";
 import styled from "styled-components";
 
-function Card({ title, desc, children, onMoveUp, onMoveDown, onDelete }) {
+function Card({ title, desc, children, onMoveUp, onMoveDown, onDelete, onClick, $isSelected }) {
 	return (
-		<CardWrapper>
-			<Head>
+		<CardWrapper $isSelected={$isSelected}>
+			<Head onClick={onClick}>
 				<Title>{title}</Title>
 				<Desc>{desc}</Desc>
 			</Head>
@@ -43,7 +43,7 @@ const ButtonGroup = styled.div`
 `;
 
 const CardWrapper = styled.div`
-  border: 1px solid #dddddd;
+  border: ${({ $isSelected }) => $isSelected ? "1px solid #1890ff" : "1px solid #dddddd"};
   width: 400px;
   margin: 30px auto;
   background-color: #fff;

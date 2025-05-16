@@ -19,10 +19,10 @@ const items = [
 ];
 
 
-function MainLayout({ children, selectedKey }) {
+function MainLayout({ children, selectedKey, padding = 45 }) {
   const contentStyle = useMemo(() => {
     return {
-      padding: 45,
+      padding: padding,
     };
   }, []);
   const location = useLocation();
@@ -55,7 +55,9 @@ function MainLayout({ children, selectedKey }) {
       </Sider>
       <Layout>
         <Header />
-        <Content  style={contentStyle} >{children}</Content>
+        <Content  style={contentStyle} >
+          {children}
+        </Content>
       </Layout>
     </Layout>
   );
