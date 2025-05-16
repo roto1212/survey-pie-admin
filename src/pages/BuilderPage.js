@@ -3,47 +3,37 @@ import { Col, Input, Row } from "antd";
 import OptionSection from "../components/OptionSection";
 import PreviewSection from "../components/PreviewSection";
 import MainLayout from "../layouts/MainLayout";
-import {
-	setTitle,
-	addQuestion,
-	moveUpQuestion,
-	moveDownQuestion,
-	deleteQuestion,
-} from "../stores/survey/surveySlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import fetchSurvey from "../services/fetchSurvey";
+import BuilderTitleInput from "../components/BuilderTitleInput";
 
 function BuilderPage() {
-	const survey = useSelector((state) => state.survey);
-
+	const loading = useSelector((state) => state.survey.loading);
+	const error = useSelector((state) => state.survey.error);
 	const dispatch = useDispatch();
+	const { surveyId } = useParams();
+
+	useEffect(() => {
+		dispatch(fetchSurvey(surveyId));
+	}, [dispatch, surveyId]);
+
+	if (error) {
+		return <div>에러가 발생했습니다.</div>;
+	}
+
+	if (loading) {
+		return <div>로딩중...</div>;
+	}
 	return (
 		<div>
 			<MainLayout selectedKey="builder">
 				<Row>
 					<Col flex="auto">
-						<Input
-							placeholder="설문 제목을 입력해주세요."
-							value={survey.title}
-							onChange={(e) => {
-								dispatch(setTitle(e.target.value));
-							}}
-						/>
-						<PreviewSection
-							questions={survey.questions}
-							addQuestion={(type) => {
-								dispatch(addQuestion(type));
-							}}
-							moveUpQuestion={(index) => {
-								dispatch(moveUpQuestion(index));
-							}}
-							moveDownQuestion={(index) => {
-								dispatch(moveDownQuestion(index));
-							}}
-							deleteQuestion={(index) => {
-								dispatch(deleteQuestion(index));
-							}}
-						/>
+						<BuilderTitleInput />
+						<PreviewSection />
 					</Col>
 					<Col flex="350px">
 						<OptionSection />
