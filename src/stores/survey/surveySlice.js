@@ -70,7 +70,13 @@ export const surveySlice = createSlice({
       const question = action.payload.question;
       if (index < 0 || index >= state.data.questions.length) return;
       state.data.questions[index] = question;
-    }
+    },
+		resetSurvey: (state) => {
+			state.data = {
+				title: "",
+				questions: [],
+			};
+		}
 	},
 });
 
@@ -85,6 +91,7 @@ export const {
 	setLoading,
 	setError,
   setQuestion,
+	resetSurvey,
 } = surveySlice.actions;
 
 export default surveySlice.reducer;

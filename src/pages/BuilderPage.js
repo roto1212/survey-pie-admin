@@ -10,6 +10,8 @@ import { useParams } from "react-router-dom";
 import fetchSurvey from "../services/fetchSurvey";
 import BuilderTitleInput from "../components/BuilderTitleInput";
 import FloatingButton from "../components/FloatingButton";
+import { resetSurvey } from "../stores/survey/surveySlice";
+import { setSelectedQuestionId } from "../stores/selectedQuestionId/selectedQuestionIdSlice";
 
 function BuilderPage() {
 	const loading = useSelector((state) => state.survey.loading);
@@ -20,6 +22,9 @@ function BuilderPage() {
 	useEffect(() => {
 		if (surveyId) {
 			dispatch(fetchSurvey(surveyId));
+		} else {
+			dispatch(resetSurvey());
+			dispatch(setSelectedQuestionId(null));
 		}
 	}, [dispatch, surveyId]);
 

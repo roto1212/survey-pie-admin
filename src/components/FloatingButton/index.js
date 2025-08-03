@@ -3,12 +3,16 @@ import { useSelector } from "react-redux";
 import putSurvey from "../../services/putSurvey";
 import styled from "styled-components";
 import postSurvey from "../../services/postSurvey";
+import { useNavigate } from "react-router-dom";
 
 function FloatingButton({ children }) {
   const survey = useSelector(state => state.survey.data);
   const isEditPage = !!survey.id; 
+  const navigate = useNavigate();
   return <FloatingButtonWrapper>
-    <Button type="primary" onClick={() =>isEditPage ? putSurvey(survey) : postSurvey(survey)}>
+    <Button type="primary" onClick={() =>isEditPage ? putSurvey(survey) : postSurvey(survey).then((data)=>{
+      navigate(`/builder/${data.id}`);
+    })}>
       {isEditPage ? '저장' : '생성'}
     </Button>
   </FloatingButtonWrapper>

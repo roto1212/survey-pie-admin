@@ -1,12 +1,14 @@
 import { Button, Table } from 'antd';
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import styled from 'styled-components';
 
 import MainLayout from '../layouts/MainLayout';
 import fetcher from '../lib/fetcher';
-const columns = [
+import deleteSurvey from '../services/deleteSurvey';
+
+const getColumns = (onDelete) => [
   {
     title: '번호',
     dataIndex: 'id',
@@ -31,7 +33,11 @@ const columns = [
     title: 'Action',
     key: 'action',
     render: (_, record) => (
-      <Button type="primary" onClick={() => console.log(record.id)}>
+      <Button type="primary" danger onClick={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        onDelete(record.id);
+      }}>
         삭제
       </Button>
     ),
@@ -40,9 +46,20 @@ const columns = [
 
 const PAGE_SIZE = 20;
 function ListPage() {
-  const { data, error } = useSWR('/surveys', fetcher);
+  const { data, error, mutate } = useSWR('/surveys?_sort=id&_order=desc', fetcher);
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
+
+  const handleDelete = useCallback(async (id) => {
+    try {
+      await deleteSurvey(id);
+      mutate(); // 삭제 후 캐시 갱신
+    } catch (error) {
+      console.error('삭제 중 오류가 발생했습니다:', error);
+    }
+  }, [mutate]);
+
+  const columns = useMemo(() => getColumns(handleDelete), [handleDelete]);
 
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return <div>Loading...</div>;
