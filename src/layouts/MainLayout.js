@@ -24,7 +24,7 @@ function MainLayout({ children, selectedKey, padding = 45 }) {
     return {
       padding: padding,
     };
-  }, []);
+  }, [padding]);
   const location = useLocation();
   const [selectedKeys, setSelectedKeys] = useState([selectedKey]);
 

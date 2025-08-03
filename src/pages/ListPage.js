@@ -2,6 +2,7 @@ import { Button, Table } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
+import styled from 'styled-components';
 
 import MainLayout from '../layouts/MainLayout';
 import fetcher from '../lib/fetcher';
@@ -10,7 +11,7 @@ const columns = [
     title: '번호',
     dataIndex: 'id',
     key: 'id',
-    render: (text) => <a>{text}</a>,
+    render: (text) => <span>{text}</span>,
   },
   {
     title: '제목',
@@ -48,6 +49,9 @@ function ListPage() {
   return (
     <div>
       <MainLayout selectedKey="list">
+        <CreateButtonWrapper>
+          <Button type="primary" onClick={() => navigate('/builder')}>새로운 설문조사 작성</Button>
+        </CreateButtonWrapper>
         <Table
           onRow={(record, rowIndex) => {
             return {
@@ -73,5 +77,10 @@ function ListPage() {
     </div>
   );
 }
+
+const CreateButtonWrapper = styled.div`
+  margin-bottom: 20px;
+  text-align: right;
+`;
 
 export default ListPage;

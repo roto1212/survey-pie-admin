@@ -1,4 +1,4 @@
-import { Col, Input, Row } from "antd";
+import { Col, Row } from "antd";
 
 import OptionSection from "../components/OptionSection";
 import PreviewSection from "../components/PreviewSection";
@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import fetchSurvey from "../services/fetchSurvey";
 import BuilderTitleInput from "../components/BuilderTitleInput";
+import FloatingButton from "../components/FloatingButton";
 
 function BuilderPage() {
 	const loading = useSelector((state) => state.survey.loading);
@@ -17,7 +18,9 @@ function BuilderPage() {
 	const { surveyId } = useParams();
 
 	useEffect(() => {
-		dispatch(fetchSurvey(surveyId));
+		if (surveyId) {
+			dispatch(fetchSurvey(surveyId));
+		}
 	}, [dispatch, surveyId]);
 
 	if (error) {
@@ -39,6 +42,7 @@ function BuilderPage() {
 						<OptionSection />
 					</Col>
 				</Row>
+				<FloatingButton/>
 			</MainLayout>
 		</div>
 	);

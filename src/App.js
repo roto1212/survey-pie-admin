@@ -10,6 +10,7 @@ function App() {
         <Route path="/" element={<ListPage />} />
         <Route path="/list" element={<ListPage />} />
         <Route path="/builder/:surveyId" element={<BuilderPage />} />
+        <Route path="/builder" element={<BuilderPage />} />
       </Routes>
     </div>
   );

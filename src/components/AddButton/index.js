@@ -57,6 +57,7 @@ function AddButton({ addQuestion }) {
 }
 
 const AddButtonWrapper = styled.div`
+  margin-top: 10px;
   text-align: center;
 `;
 

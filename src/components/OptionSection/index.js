@@ -123,6 +123,10 @@ function OptionSection() {
   ] : [];
 
   const handleApply = (values) => {
+    if (question.type === 'select') {
+      values.items = values.items.split(';');
+    }
+
     const { title, desc, required, ...options } = values;
     dispatch(setQuestion({
       index: selectedQuestionId,
